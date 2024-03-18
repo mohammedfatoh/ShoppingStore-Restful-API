@@ -12,6 +12,6 @@ namespace ShoppingStore.Repository.Repositories
         public Task<T> GetById(int id);
         public IEnumerable<T> GetAll();
 
-       public Task<T> Find(Expression<Func<T,bool>> match);
+       public Task<T> Find(Expression<Func<T,bool>> criteria);
     }
 }
