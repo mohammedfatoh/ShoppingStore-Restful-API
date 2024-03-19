@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using ShoppingStore.API.Mapper;
 using ShoppingStore.DataAccess;
 using ShoppingStore.DataAccess.Repositories;
 using ShoppingStore.Repository;
@@ -17,6 +18,8 @@ b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
 
 //builder.Services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

@@ -17,6 +17,29 @@ namespace ShoppingStore.DataAccess.Repositories
             _context = context;
         }
 
+        public async Task<T> AddAsync(T entity)
+        {
+            await _context.Set<T>().AddAsync(entity);
+            return entity;
+        }
+
+        public async Task<IEnumerable<T>> AddRangeAsync(IEnumerable<T> entities)
+        {
+             await _context.Set<T>().AddRangeAsync(entities);
+            return entities;
+        }
+
+        public  void Delete(T entity)
+        {
+            _context.Set<T>().Remove(entity);
+        }
+
+        public void DeleteRange(IEnumerable<T> entities)
+        {
+            _context.Set<T>().RemoveRange(entities);
+
+        }
+
         public async Task<T> Find(Expression<Func<T, bool>> criteria)
         {
             return await _context.Set<T>().SingleOrDefaultAsync(criteria);
@@ -30,6 +53,12 @@ namespace ShoppingStore.DataAccess.Repositories
         public async Task<T> GetById(int id)
         {
             return await _context.Set<T>().FindAsync(id);
+        }
+
+        public T Update(T entity)
+        {
+             _context.Update(entity);
+            return entity;
         }
     }
 }

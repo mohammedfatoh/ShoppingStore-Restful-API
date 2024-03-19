@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShoppingStore.DataAccess;
 
@@ -11,9 +12,11 @@ using ShoppingStore.DataAccess;
 namespace ShoppingStore.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240318123650_AddPropertiesTOUser")]
+    partial class AddPropertiesTOUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,7 +49,7 @@ namespace ShoppingStore.DataAccess.Migrations
                         .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.ToTable("Roles", "security");
+                    b.ToTable("AspNetRoles", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -71,7 +74,7 @@ namespace ShoppingStore.DataAccess.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("RoleClaims", "security");
+                    b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -96,7 +99,7 @@ namespace ShoppingStore.DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserClaims", "security");
+                    b.ToTable("AspNetUserClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -118,7 +121,7 @@ namespace ShoppingStore.DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserLogins", "security");
+                    b.ToTable("AspNetUserLogins", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -133,7 +136,7 @@ namespace ShoppingStore.DataAccess.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("UserRoles", "security");
+                    b.ToTable("AspNetUserRoles", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -152,7 +155,7 @@ namespace ShoppingStore.DataAccess.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("UserTokens", "security");
+                    b.ToTable("AspNetUserTokens", (string)null);
                 });
 
             modelBuilder.Entity("OrderProduct", b =>
@@ -257,7 +260,7 @@ namespace ShoppingStore.DataAccess.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("Users", "security");
+                    b.ToTable("AspNetUsers", (string)null);
                 });
 
             modelBuilder.Entity("ShoppingStore.Repository.Models.Category", b =>
@@ -335,13 +338,7 @@ namespace ShoppingStore.DataAccess.Migrations
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Orders");
                 });
@@ -463,17 +460,6 @@ namespace ShoppingStore.DataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ShoppingStore.Repository.Models.Order", b =>
-                {
-                    b.HasOne("ShoppingStore.Repository.Models.ApplicationUser", "User")
-                        .WithMany("Orders")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("ShoppingStore.Repository.Models.Product", b =>
                 {
                     b.HasOne("ShoppingStore.Repository.Models.Category", "Category")
@@ -483,11 +469,6 @@ namespace ShoppingStore.DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("ShoppingStore.Repository.Models.ApplicationUser", b =>
-                {
-                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("ShoppingStore.Repository.Models.Category", b =>

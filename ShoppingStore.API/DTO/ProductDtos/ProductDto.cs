@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace ShoppingStore.Repository.Models
+namespace ShoppingStore.API.DTO.ProductDtos
 {
-    public class Product
+    public class ProductDto
     {
         public int Id { get; set; }
 
@@ -15,12 +10,6 @@ namespace ShoppingStore.Repository.Models
         [StringLength(100, ErrorMessage = "Miniumum 3 and maximum 100 characters are allowed", MinimumLength = 3)]
         public string Name { get; set; }
 
-        public bool IsActive { get; set; }
-        public bool IsDeleted { get; set; }
-
-        public DateTime CreatedOn { get; set; }
-
-        public DateTime ModifiedOn { get; set; }
 
         [Required(ErrorMessage = "Description of product Required")]
         public string Description { get; set; }
@@ -28,7 +17,6 @@ namespace ShoppingStore.Repository.Models
         //[Required(ErrorMessage = "image of product Required")]
         public byte[]? Image { get; set; }
 
-        public bool IsFeatured { get; set; }
 
         [Required]
         [Range(typeof(int), "1", "500", ErrorMessage = "Invalid Quantity")]
@@ -39,10 +27,5 @@ namespace ShoppingStore.Repository.Models
         public decimal Price { get; set; }
 
         public int CategoryId { get; set; }
-
-
-        public virtual Category? Category { get; set; }
-
-        public virtual ICollection<Order>? Orders { get; set; }
     }
 }
