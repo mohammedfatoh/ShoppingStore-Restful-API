@@ -5,6 +5,7 @@ using ShoppingStore.API.DTO.CategoryDTo;
 using ShoppingStore.Repository.Models;
 using ShoppingStore.Repository;
 using ShoppingStore.API.DTO.OrderDTos;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ShoppingStore.API.Controllers
 {
@@ -21,6 +22,7 @@ namespace ShoppingStore.API.Controllers
             _mapper = mapper;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetById(int id)
         {
@@ -67,6 +69,7 @@ namespace ShoppingStore.API.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> AddOrder(OrderDto orderDto)
         {
             if (!ModelState.IsValid)
@@ -86,8 +89,9 @@ namespace ShoppingStore.API.Controllers
             }
         }
 
+        [Authorize]
         [HttpDelete("Delete")]
-        public async Task<IActionResult> deleteOrder(int id)
+        public async Task<IActionResult> CancleOrder(int id)
         {
             var order = await _unitOfWork.Orders.GetById(id);
             if (order == null)

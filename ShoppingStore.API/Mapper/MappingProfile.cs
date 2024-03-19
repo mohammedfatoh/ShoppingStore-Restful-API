@@ -2,6 +2,7 @@
 using ShoppingStore.API.DTO.CategoryDTo;
 using ShoppingStore.API.DTO.OrderDTos;
 using ShoppingStore.API.DTO.ProductDtos;
+using ShoppingStore.API.DTO.UserDtos;
 using ShoppingStore.Repository.Models;
 
 namespace ShoppingStore.API.Mapper
@@ -18,6 +19,9 @@ namespace ShoppingStore.API.Mapper
 
             CreateMap<Order, OrderDto>().ReverseMap();
             CreateMap<Order, OrderUpdateDto>().ReverseMap();
+
+            CreateMap<ApplicationUser,RegisterUserDto>().ReverseMap();
+            CreateMap<ApplicationUser, LoginUserDto>().ReverseMap();
         }
     }
 }

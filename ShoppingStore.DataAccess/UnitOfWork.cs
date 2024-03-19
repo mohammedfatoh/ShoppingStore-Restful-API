@@ -25,6 +25,7 @@ namespace ShoppingStore.DataAccess
 
             Categories = new BaseRepository<Category>(_context);
             Products = new BaseRepository<Product>(_context);
+            Orders = new BaseRepository<Order>(_context);
         }
         public async Task<int> Complete()
         {

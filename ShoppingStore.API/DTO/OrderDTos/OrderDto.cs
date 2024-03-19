@@ -38,5 +38,7 @@ namespace ShoppingStore.API.DTO.OrderDTos
         public string? StatusOfOrder { get; set; }
 
         public string? Quantities { get; set; }
+
+        public string UserId { get; set; }
     }
 }

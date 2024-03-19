@@ -10,11 +10,9 @@ namespace ShoppingStore.Repository.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        [Required, MaxLength(100), MinLength(3)]
-        public string FirstName { get; set; }
+        public string? FirstName { get; set; }
 
-        [Required, MaxLength(100), MinLength(3)]
-        public string LastName { get; set; }
+        public string? LastName { get; set; }
 
         public bool IsActive { get; set; }
 
@@ -25,8 +23,7 @@ namespace ShoppingStore.Repository.Models
         [Required]
         public DateTime CreatedOn { get; set; }
 
-        [Required]
-        public DateTime ModifiedOn { get; set; }
+        public DateTime? ModifiedOn { get; set; }
 
         public virtual ICollection<Order> Orders { get; set; }
     }
