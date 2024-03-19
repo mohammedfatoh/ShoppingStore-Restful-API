@@ -12,8 +12,8 @@ namespace ShoppingStore.Repository.Repositories
         public Task<T> GetById(int id);
         public IEnumerable<T> GetAll();
 
-       public Task<T> Find(Expression<Func<T,bool>> criteria);
-
+       public Task<T> FindAsync(Expression<Func<T,bool>> criteria);
+        public Task<IEnumerable<T>> FindAllAsync(Expression<Func<T, bool>> criteria);
         Task<T> AddAsync(T entity);
 
         Task<IEnumerable<T>> AddRangeAsync(IEnumerable<T> entities);

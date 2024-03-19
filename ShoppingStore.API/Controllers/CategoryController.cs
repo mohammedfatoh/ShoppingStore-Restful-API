@@ -48,12 +48,23 @@ namespace ShoppingStore.API.Controllers
         [HttpGet("GetByName")]
         public async Task<IActionResult> GetByName(string name)
         {
-            var category = await _unitOfWork.Categories.Find(c => c.Name == name);
+            var category = await _unitOfWork.Categories.FindAsync(c => c.Name == name);
             if (category == null)
             {
                 return NotFound("Category is Not Found");
             }
             return Ok(_mapper.Map<CategoryDTo>(category));
+        }
+
+        [HttpGet("FindAll")]
+        public async Task<IActionResult> FindAll(string name)
+        {
+           var categories = await _unitOfWork.Categories.FindAllAsync(c => c.Name.Contains(name));
+            if (categories == null)
+            {
+                return NotFound("Category is Not Found");
+            }
+            return Ok(_mapper.Map<IEnumerable<CategoryDTo>>(categories));
         }
 
         [HttpPost]
@@ -62,7 +73,7 @@ namespace ShoppingStore.API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var existcategory = await _unitOfWork.Categories.Find(c => c.Name == categoryDTo.Name);
+            var existcategory = await _unitOfWork.Categories.FindAsync(c => c.Name == categoryDTo.Name);
             if (existcategory != null)
                 return BadRequest("Category Already With The Same Name exists");
 
@@ -111,7 +122,7 @@ namespace ShoppingStore.API.Controllers
                 return BadRequest(ModelState);
             var category = await _unitOfWork.Categories.GetById(id);
 
-            var existcategory = await _unitOfWork.Categories.Find(c => c.Name == categoryUpdateDto.Name);
+            var existcategory = await _unitOfWork.Categories.FindAsync(c => c.Name == categoryUpdateDto.Name);
             if (existcategory != null && existcategory.Id != category.Id)
                 return BadRequest("Category Already With The Same Name exists");
 

@@ -13,6 +13,8 @@ namespace ShoppingStore.Repository
         IBaseRepository<Category> Categories { get; }
         IBaseRepository<Product> Products { get; }
 
+        IBaseRepository<Order> Orders { get; }  
+
        public Task<int> Complete();
 
     }

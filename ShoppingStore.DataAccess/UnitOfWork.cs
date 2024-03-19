@@ -17,6 +17,8 @@ namespace ShoppingStore.DataAccess
         public IBaseRepository<Category> Categories { get; private set; }
         public IBaseRepository<Product> Products { get; private set; }
 
+        public IBaseRepository<Order> Orders { get; private set; }
+
         public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;

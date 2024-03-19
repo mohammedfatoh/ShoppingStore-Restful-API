@@ -40,9 +40,14 @@ namespace ShoppingStore.DataAccess.Repositories
 
         }
 
-        public async Task<T> Find(Expression<Func<T, bool>> criteria)
+        public async Task<T> FindAsync(Expression<Func<T, bool>> criteria)
         {
             return await _context.Set<T>().SingleOrDefaultAsync(criteria);
+        }
+
+        public async Task<IEnumerable<T>> FindAllAsync(Expression<Func<T, bool>> criteria)
+        {
+            return await _context.Set<T>().Where(criteria).ToListAsync();
         }
 
         public IEnumerable<T> GetAll()
