@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,15 +17,18 @@ namespace ShoppingStore.API.Controllers
     public class UserController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> usermanager;
+        private readonly SignInManager<ApplicationUser> signInManager;
         private readonly IConfiguration configuration;
         private readonly IMapper _mapper;
 
         public UserController(UserManager<ApplicationUser> usermanager,
-            IConfiguration configuration,IMapper mapper)
+            IConfiguration configuration,IMapper mapper,
+            SignInManager<ApplicationUser> signInManager)
         {
             this.usermanager = usermanager;
             this.configuration = configuration;
             this._mapper = mapper;
+            this.signInManager = signInManager;
         }
         //Create Account new User "Registration" "Post"
         [HttpPost("register")]//api/Account/register
@@ -100,5 +104,13 @@ namespace ShoppingStore.API.Controllers
         }
         return Unauthorized();
     }
-}
+
+     [HttpPost("SignOut")]
+     [Authorize]
+     public async Task<IActionResult> SignOut()
+     {
+            await signInManager.SignOutAsync();
+            return Ok("Logout");
+     }
+    }
 }
