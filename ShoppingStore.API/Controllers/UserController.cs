@@ -41,6 +41,12 @@ namespace ShoppingStore.API.Controllers
                 {
                     return BadRequest("User Already exist with same UserName");
                 }
+
+                var existEmailuser = await usermanager.FindByEmailAsync(userDto.UserName);
+                if (existEmailuser != null)
+                {
+                    return BadRequest("User Already exist with same Email");
+                }
                 //save
                 var user = _mapper.Map<ApplicationUser>(userDto);
                 user.CreatedOn = DateTime.Now;
