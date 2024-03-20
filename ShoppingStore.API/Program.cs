@@ -26,6 +26,13 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
 //builder.Services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
+builder.Services.AddCors(corsOptions => {
+    corsOptions.AddPolicy("MyPolicy", corsPolicyBuilder =>
+    {
+        corsPolicyBuilder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+    });
+});
+
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 builder.Services.AddAuthentication(options =>
@@ -59,6 +66,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("MyPolicy");
 
 app.UseAuthentication();
 
