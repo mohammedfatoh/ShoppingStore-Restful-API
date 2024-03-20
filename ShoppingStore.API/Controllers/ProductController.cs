@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShoppingStore.API.DTO.CategoryDTo;
@@ -67,6 +68,7 @@ namespace ShoppingStore.API.Controllers
             return Ok(_mapper.Map<IEnumerable<ProductDto>>(products));
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost("Add")]
         public async Task<IActionResult> Addproduct(ProductDto productDto)
         {
@@ -90,6 +92,7 @@ namespace ShoppingStore.API.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("Delete")]
         public async Task<IActionResult> deleteproduct(int id)
         {
@@ -114,6 +117,7 @@ namespace ShoppingStore.API.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPatch("Update")]
         public async Task<IActionResult> updateproduct(ProductUpdateDto productUpdateDto, int id)
         {

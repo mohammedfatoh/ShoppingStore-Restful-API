@@ -69,7 +69,7 @@ namespace ShoppingStore.API.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> AddOrder(OrderDto orderDto)
         {
             if (!ModelState.IsValid)
@@ -89,7 +89,7 @@ namespace ShoppingStore.API.Controllers
             }
         }
 
-        [Authorize]
+        [Authorize(Roles = "User")]
         [HttpDelete("Delete")]
         public async Task<IActionResult> CancleOrder(int id)
         {
@@ -114,6 +114,7 @@ namespace ShoppingStore.API.Controllers
             }
         }
 
+        [Authorize(Roles = "User")]
         [HttpPatch("Update")]
         public async Task<IActionResult> updateOrder(OrderDto orderUpdateDto, int id)
         {
