@@ -25,3 +25,8 @@ while JWT authentication and role-based authorization enhance security.<br />
  - **The RESTful APIs provide JSON responses.** <br />
  - **CRUD APIs for Main Business Entities: Facilitates Create, Read, Update,and Delete operations.Search, Sort,** <br /> 
  **and Filter APIs: Enhances data retrieval capabilities**.
+
+   
+![Screen Capture 002 - Swagger UI - localhost](https://github.com/mohammedfatoh/ShoppingStore-Restful-API/assets/65139875/8c76b0fa-cc80-4410-a837-1cd7ec74d8be)
+
+   
